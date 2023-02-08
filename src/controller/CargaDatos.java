@@ -8,7 +8,7 @@ public class CargaDatos {
 	public static Verificacion cargarArchivo(String narchivo) throws IOException{
 		ArrayList<ArrayList<String>> retorno = new ArrayList<ArrayList<String>>();
 		BufferedReader br = new BufferedReader(new FileReader(narchivo));
-		String linea = br.readLine(); // La primera línea del archivo se ignora porque únicamente tiene los títulos de
+		String linea = br.readLine().toLowerCase(); // La primera línea del archivo se ignora porque únicamente tiene los títulos de
 										// las columnas
 		while (linea != null) // Cuando se llegue al final del archivo, linea tendrá el valor null
 		{
