@@ -11,6 +11,11 @@ public class Consola {
 	
 	private Verificacion verificacion;
 	
+	/**
+	 * Este metodo imprime el menu y llama al metodo 
+	 * necesario para cumplir con la opcion selecciona
+	 * por el usuario
+	 */
 	public void ejecutarAplicacion() {
 		System.out.println("Comenzando parser");
 		
@@ -33,6 +38,9 @@ public class Consola {
 		
 	}
 	
+	/**
+	 * Imprime el menu
+	 */
 	public void mostarApp() {
 		System.out.println("\nOpciones: \n");
 		System.out.println("1. Cargar un archivo");
@@ -41,6 +49,14 @@ public class Consola {
 		
 	}
 	
+	
+	/**
+	 * Este metodo imprime un mensaje enviado como argumento
+	 * y recibe una respuesta por el usuario
+	 * @param mensaje
+	 * @return Cadena de caracteres que el ususario ingresa
+	 * @throws IOException
+	 */
 	public String input(String mensaje) throws IOException
 	{
 		System.out.print(mensaje + ": ");
@@ -48,6 +64,12 @@ public class Consola {
 		return reader.readLine();
 	}
 	
+	
+	/**
+	 * Con el nombre del archivo recibido por parametro
+	 * carga el archivo en la variable verificacion
+	 * @throws IOException
+	 */
 	private void ejecutarCargaArchivo() throws IOException {
 		System.out.println("\nCarga de archivo\n");
 		String archivo  = input("Ingrese el nombre del archivo .txt");
@@ -57,6 +79,11 @@ public class Consola {
 		
 	}
 	
+	
+	/**
+	 * Este metodo verifica todo el codigo del txt e imprime
+	 * si es correcto o incorrecto
+	 */
 	private void ejecutarVerificacion() {
 		System.out.println("\nEjecutando verificacion\n");
 		boolean esCorrecto = verificacion.verificarArchivo();
@@ -69,7 +96,10 @@ public class Consola {
 	}
 		
 		
-	
+	/**
+	 * Este metodo ejecuta la aplicacion
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		Consola consola = new Consola();
 		consola.ejecutarAplicacion();
