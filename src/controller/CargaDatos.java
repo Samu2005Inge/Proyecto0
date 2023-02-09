@@ -21,6 +21,9 @@ public class CargaDatos {
 			retorno.add(palabras);
 			
 			linea = br.readLine(); // Leer la siguiente línea
+			
+			if (linea != null)
+				linea = linea.toLowerCase();
 		}
 		br.close();
 		

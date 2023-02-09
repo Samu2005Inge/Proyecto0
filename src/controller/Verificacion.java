@@ -28,13 +28,18 @@ public class Verificacion {
 	 */
 	public boolean verificarArchivo() {
 		int numLinea = 1;
-		boolean estaCorrecto = false;
+		boolean estaCorrecto = true;
 		
 		for (ArrayList<String> linea: informacion) {
-			if (numLinea == 1)
-				estaCorrecto = reglas.signatureIsPresent(linea);
-			
-			numLinea++;
+			if (estaCorrecto) {
+				if (numLinea == 1)
+					estaCorrecto = reglas.signatureIsPresent(linea);
+					
+				else if (numLinea == 2)
+					estaCorrecto = reglas.varsAreCorrect(linea);
+				
+				numLinea++;
+			}
 		}
 		
 		return estaCorrecto;
