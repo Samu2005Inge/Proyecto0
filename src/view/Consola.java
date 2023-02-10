@@ -24,7 +24,7 @@ public class Consola {
 		while (seguir) {
 			try {
 				mostarApp();
-				int opcionSeleccionada = Integer.parseInt(input("Por favor seleccione una opciÃ³n"));
+				int opcionSeleccionada = Integer.parseInt(input("Por favor seleccione una opcion"));
 				
 				if (opcionSeleccionada == 1)
 					ejecutarCargaArchivo();
@@ -74,7 +74,7 @@ public class Consola {
 		System.out.println("\nCarga de archivo\n");
 		String archivo  = input("Ingrese el nombre del archivo .txt");
 		
-		verificacion = CargaDatos.cargarArchivo(archivo);
+		verificacion = CargaDatos.cargarArchivo("textos/" + archivo);
 		System.out.println("Se cargo el archivo correctamente.");
 		
 	}
