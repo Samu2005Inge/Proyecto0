@@ -2,4 +2,4 @@ ROBOT_R
 VARS nom , x , y ,one,uno,;
 PROCS
 putCB [ |c , b | assignTo : 34 , c;
-goto: c,b]
+nop:  ]

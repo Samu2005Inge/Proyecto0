@@ -30,6 +30,8 @@ public class Consola {
 					ejecutarCargaArchivo();
 				else if (opcionSeleccionada == 2)
 					ejecutarVerificacion();
+				else if (opcionSeleccionada == 4)
+					seguir=false;
 			} 
 			catch (NumberFormatException | IOException e) {
 				System.out.println("Debe seleccionar una de las opciones.");

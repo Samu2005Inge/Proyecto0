@@ -72,18 +72,56 @@ public class Verificacion {
 			
 			for (ArrayList<String> instruccion: instrucciones) {
 				String primerToken = instruccion.get(0);
-				System.out.println(instruccion);
 				if (esCorrecto) {
-					System.out.println(primerToken);
 					if (primerToken.contains("assignto")) {
 						String[] type = {"nv", "name"}; // nv representa un numero o variable o parametro, name es variable o parametro
 						// n es un numero
 						esCorrecto = reglas.comprobarInstruccion(instruccion, "assignto", type, funcion.getParametros());
 					}
-					if (primerToken.contains("goto")) {
+					else if (primerToken.contains("goto")) {
 						String[] type = {"nv", "nv"}; 
 						esCorrecto = reglas.comprobarInstruccion(instruccion, "goto", type, funcion.getParametros());
 					}
+					else if (primerToken.contains("move")) {
+						String[] type = {"nv"}; 
+						esCorrecto = reglas.comprobarInstruccion(instruccion, "move", type, funcion.getParametros());
+					}
+					else if (primerToken.contains("turn")) {
+						String[] type = {"d"}; 
+						esCorrecto = reglas.comprobarInstruccion(instruccion, "turn", type, funcion.getParametros());
+					}
+					else if (primerToken.contains("face")) {
+						String[] type = {"f"}; 
+						esCorrecto = reglas.comprobarInstruccion(instruccion, "face", type, funcion.getParametros());
+					}
+					else if (primerToken.contains("put")) {
+						String[] type = {"nv","o"}; 
+						esCorrecto = reglas.comprobarInstruccion(instruccion, "put", type, funcion.getParametros());
+					}
+					else if (primerToken.contains("pick")) {
+						String[] type = {"nv","o"}; 
+						esCorrecto = reglas.comprobarInstruccion(instruccion, "pick", type, funcion.getParametros());
+					}
+					else if (primerToken.contains("movetothe")) {
+						String[] type = {"nv","de"}; 
+						esCorrecto = reglas.comprobarInstruccion(instruccion, "movetothe", type, funcion.getParametros());
+					}
+					else if (primerToken.contains("moveindir")) {
+						String[] type = {"nv","f"}; 
+						esCorrecto = reglas.comprobarInstruccion(instruccion, "moveindir", type, funcion.getParametros());
+					}
+					else if (primerToken.contains("jumptothe")) {
+						String[] type = {"nv","de"}; 
+						esCorrecto = reglas.comprobarInstruccion(instruccion, "jumptothe", type, funcion.getParametros());
+					}
+					else if (primerToken.contains("jumpindir")) {
+						String[] type = {"nv","f"}; 
+						esCorrecto = reglas.comprobarInstruccion(instruccion, "jumpindir", type, funcion.getParametros());
+					}
+					else if (primerToken.contains("nop")) {
+						esCorrecto =true; 	
+					}
+					
 							
 				}
 			}

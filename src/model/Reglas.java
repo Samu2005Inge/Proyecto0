@@ -131,7 +131,6 @@ public class Reglas {
 		}
 		
 		if (signature && dosPuntos) {
-			System.out.println("Llegue aqui");
 			String[] varsSplit = varsFuncion.split(",");
 			esCorrecto = comprobarVariables(varsSplit, type, ltParameters);
 		}
@@ -141,16 +140,13 @@ public class Reglas {
 	
 	private boolean comprobarVariables(String[] varsSplit, String[] type, String[] ltParamers) {
 		boolean esCorrecto = true;
-		
 		if (varsSplit.length == type.length) {
 			for (int i=0; i<type.length; i++) {
 				String varActual = varsSplit[i].replaceAll("^\\s*","").replaceAll("\\s*$","").replace("]", "").replace(";", "");
-				System.out.println(varActual);
 				if (esCorrecto == true) {
 					if (type[i].equals("name")) {
 						esCorrecto = buscarEnArray(ltVars, varActual);
 						if (!esCorrecto) {
-							System.out.println("holaaaa");
 							esCorrecto = buscarEnArray(ltParamers, varActual);
 						}
 								
@@ -176,6 +172,20 @@ public class Reglas {
 				        }
 						if (esCorrecto == false && (buscarEnArray(ltVars, varActual) || buscarEnArray(ltParamers, varActual)))
 							esCorrecto = true;
+					}
+					else if (type[i].equals("d")){
+						if (varActual.contains("leftrightaround")) {
+							esCorrecto = true;
+						}
+					}
+					else if (type[i].equals("f") && varActual.contains("northsoutheastwest")){
+						esCorrecto = true;
+					}
+					else if (type[i].equals("o") && varActual.contains("chipsballoons")){
+						esCorrecto = true;
+					}
+					else if (type[i].equals("de") && varActual.contains("frontrightleftback")){
+						esCorrecto = true;
 					}
 				}
 			}
