@@ -60,6 +60,10 @@ public class Funcion {
 		return instrucciones;
 	}
 
+	public void setInstrucciones(ArrayList<ArrayList<String>> instrucciones) {
+		this.instrucciones = instrucciones;
+	}
+
 	
 	
 

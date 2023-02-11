@@ -10,7 +10,7 @@ public class Verificacion {
 	private Reglas reglas;
 	private ArrayList<Funcion> funciones;
 	private Funcion comandos;
-	private String comandosbase = "assignto goto move turn face put pick movetothe moveindir jumptothe jumpindir nop ";
+	private String comandosbase = "assignto: goto: move: turn: face: put: pick: movetothe: moveindir: jumptothe: jumpindir: nop: ";
 	private ArrayList<ArrayList<String>> funcPropias;
 	
 	
@@ -63,7 +63,7 @@ public class Verificacion {
 		
 		int ultPos = this.funciones.size() -1;
 		this.comandos = this.funciones.get(ultPos);
-		this.funciones.remove(ultPos);
+		this.funciones.get(ultPos).setNombre("insprograma");
 		
 		
 		if (estaCorrecto) {
@@ -85,23 +85,29 @@ public class Verificacion {
 	
 	private void verificarComandos(){
 		ArrayList<ArrayList<String>> instrucciones = comandos.getInstrucciones();
-		int iterator = 0;
-		System.out.println("hii "+ instrucciones);
-			
+		ArrayList<ArrayList<String>> newInstrucciones = new ArrayList<ArrayList<String>>();
+	
 			for (ArrayList<String> instruccion: instrucciones){
+				
+				boolean continuar = true;
 				for (String token: instruccion){
-					String primerToken = token.replaceAll("^\\s*","").replaceAll("\\s*$","").replace("|", "");
-					boolean contiene = " [".contains(primerToken);
-					if (!comandosbase.contains(primerToken) && contiene){
-						System.out.println(primerToken);
+					token = token.replaceAll("^\\s*","").replaceAll("\\s*$","").replace("|", "");
+					if (!comandosbase.contains(token) && !" [ ".contains(token) && continuar){
+						continuar = false;
 						funcPropias.add(instruccion);
-						instrucciones.remove(iterator);
-				}
-				iterator++;
+					}
+					else if (comandosbase.contains(token) && continuar) {
+						newInstrucciones.add(instruccion);
+						continuar = false;
+					}
+				
 				}
 				
 			}
-			System.out.println("inst "+ funcPropias);
+			System.out.println("Funciones propias: "+ funcPropias);
+			comandos.setInstrucciones(newInstrucciones);
+			System.out.println("Funciones del lenguaje: "+ comandos.getInstrucciones());
+			
 				
 		
 	}
@@ -115,6 +121,7 @@ public class Verificacion {
 			String nombreFunc = funcion.getNombre();
 			if (esCorrecto) {
 				esCorrecto = reglas.varIsCorrect(nombreFunc);
+				System.out.println("El nombre " + nombreFunc + " es correcto: " + esCorrecto);
 			}
 			this.comandosbase = this.comandosbase + " " + nombreFunc;
 		}
@@ -129,6 +136,7 @@ public class Verificacion {
 		
 		for (Funcion funcion: ltFunciones) {
 			ArrayList<ArrayList<String>> instrucciones = funcion.getInstrucciones();
+			
 			
 			for (ArrayList<String> instruccion: instrucciones) {
 				String primerToken = instruccion.get(0).replaceAll("^\\s*","").replaceAll("\\s*$","").replace("|", "");

@@ -145,7 +145,6 @@ public class Reglas {
 		if (varsSplit.length == type.length) {
 			for (int i=0; i<type.length; i++) {
 				String varActual = varsSplit[i].replaceAll("^\\s*","").replaceAll("\\s*$","").replace("]", "").replace(";", "");
-				System.out.println(varActual);
 				if (esCorrecto == true) {
 					if (type[i].equals("name")) {
 						esCorrecto = buscarEnArray(ltVars, varActual);

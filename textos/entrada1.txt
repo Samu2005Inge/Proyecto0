@@ -10,4 +10,6 @@ put : c , chips ; put : b , balloons; jumpToThe: 34, front]
 
 [
 put2CB : 3 , 3;
-putc : 2 ,1]
+putc : 2 ,1;
+moveInDir : 1 , south;
+jumpToThe: 4, front]
