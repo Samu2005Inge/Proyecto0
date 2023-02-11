@@ -28,7 +28,7 @@ public class Funcion {
 					this.parametros.add(cad.replace("|", "").replace(",", "").replace(" ", ""));
 			}
 		
-			if (!token.contains("|") && corchetes == 2) {
+			if (!token.contains("|") && (corchetes == 2 || this.nombre.equals("["))) {
 				tempInstruccion.add(token);
 				
 				if (token.contains(";") || cont == bloque.size() -1) {

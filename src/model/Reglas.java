@@ -66,15 +66,16 @@ public class Reglas {
 	
 	public boolean varIsCorrect(String var) {
 		boolean esCorrecto = true;
-		int pos = 1;
+		int pos = 0;
 		
 		for (char letra: var.toCharArray()) {
 			if (esCorrecto) {
-				if (pos == 1)
+				if (pos == 0)
 					esCorrecto = initialChars.contains(String.valueOf(letra)); 
 				else
 					esCorrecto = chars.contains(String.valueOf(letra)); 
 			}
+			pos++;
 		}
 		
 		return esCorrecto;
@@ -143,6 +144,7 @@ public class Reglas {
 		if (varsSplit.length == type.length) {
 			for (int i=0; i<type.length; i++) {
 				String varActual = varsSplit[i].replaceAll("^\\s*","").replaceAll("\\s*$","").replace("]", "").replace(";", "");
+				System.out.println(varActual);
 				if (esCorrecto == true) {
 					if (type[i].equals("name")) {
 						esCorrecto = buscarEnArray(ltVars, varActual);
@@ -152,8 +154,6 @@ public class Reglas {
 								
 					}
 						
-					
-					
 					else if (type[i].equals("n")){
 						try {
 				            Integer.parseInt(varActual);
@@ -173,19 +173,24 @@ public class Reglas {
 						if (esCorrecto == false && (buscarEnArray(ltVars, varActual) || buscarEnArray(ltParamers, varActual)))
 							esCorrecto = true;
 					}
-					else if (type[i].equals("d")){
-						if (varActual.contains("leftrightaround")) {
-							esCorrecto = true;
+					
+					else if (type[i].equals("d") && "left right around".contains(varActual)){
+						esCorrecto = true;
 						}
-					}
-					else if (type[i].equals("f") && varActual.contains("northsoutheastwest")){
+					
+					else if (type[i].equals("f") && "north south east west".contains(varActual)){
 						esCorrecto = true;
 					}
-					else if (type[i].equals("o") && varActual.contains("chipsballoons")){
+					
+					else if (type[i].equals("o") && "chips balloons".contains(varActual)){
 						esCorrecto = true;
 					}
-					else if (type[i].equals("de") && varActual.contains("frontrightleftback")){
+					
+					else if (type[i].equals("de") && "front right left back".contains(varActual)){
 						esCorrecto = true;
+					}
+					else {
+						esCorrecto = false;
 					}
 				}
 			}

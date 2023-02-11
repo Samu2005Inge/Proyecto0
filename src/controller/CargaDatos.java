@@ -16,9 +16,11 @@ public class CargaDatos {
 			String[] partes = linea.split(" ");
 			ArrayList<String> palabras= new ArrayList<String>();
 			for (int i=0;i<partes.length;i++) {
-				palabras.add(partes[i]);
+				if (!partes[i].equals(" ") && !partes[i].equals(""))
+					palabras.add(partes[i].replaceAll("^\\s*","").replaceAll("\\s*$",""));
 			}
-			retorno.add(palabras);
+			if (!linea.equals(""))
+				retorno.add(palabras);
 			
 			linea = br.readLine(); // Leer la siguiente línea
 			

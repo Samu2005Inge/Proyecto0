@@ -1,5 +1,13 @@
 ROBOT_R
 VARS nom , x , y ,one,uno,;
 PROCS
-putCB [ |c , b | assignTo : 34 , c;
-nop:  ]
+
+ put2CB [ |c , b |  moveInDir: 1 , south ;
+put : c , chips ; put : b , balloons ]
+
+putxc [ |c , b | moveInDir : 1 , north;
+put : c , chips ; put : b , balloons; jumpToThe: 34, front]
+
+[
+goTo : 3 , 3
+putcb : 2 ,1]

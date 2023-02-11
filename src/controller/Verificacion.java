@@ -9,6 +9,8 @@ public class Verificacion {
 	private ArrayList<ArrayList<String>> informacion;
 	private Reglas reglas;
 	private ArrayList<Funcion> funciones;
+	private Funcion comandos;
+	private ArrayList<String> nomFunciones;
 	
 	
 	/**
@@ -49,18 +51,40 @@ public class Verificacion {
 					numLinea = Integer.parseInt(bloque.get(bloque.size()-1));
 					bloque.remove(bloque.get(bloque.size()-1));
 					this.funciones.add(new Funcion(bloque));
-					
 				}
 				
 			}
 			numLinea++;
 		}
 		
+		int ultPos = this.funciones.size() -1;
+		this.comandos = this.funciones.get(ultPos);
+		this.funciones.remove(ultPos);
+		
+		if (estaCorrecto) {
+			estaCorrecto = verificarNombresFunciones();
+		}
+		
 		if (estaCorrecto) {
 			estaCorrecto = verificarInstrucciones();
 		}
 		
-		return estaCorrecto;
+		return estaCorrecto; 
+	}
+	
+	private boolean verificarNombresFunciones() {
+		ArrayList<Funcion> ltFunciones = getFunciones();
+		boolean esCorrecto = true;
+		
+		for (Funcion funcion: ltFunciones) {
+			String nombreFunc = funcion.getNombre();
+			if (esCorrecto) {
+				esCorrecto = reglas.varIsCorrect(nombreFunc);
+			}
+			this.nomFunciones.add(nombreFunc);
+		}
+		
+		return esCorrecto;
 	}
 	
 	private boolean verificarInstrucciones() {
@@ -71,54 +95,54 @@ public class Verificacion {
 			ArrayList<ArrayList<String>> instrucciones = funcion.getInstrucciones();
 			
 			for (ArrayList<String> instruccion: instrucciones) {
-				String primerToken = instruccion.get(0);
+				String primerToken = instruccion.get(0).replaceAll("^\\s*","").replaceAll("\\s*$","").replace("|", "");
 				if (esCorrecto) {
-					if (primerToken.contains("assignto")) {
+					if (primerToken.equals("assignto") || primerToken.equals("assignto:")) {
 						String[] type = {"nv", "name"}; // nv representa un numero o variable o parametro, name es variable o parametro
 						// n es un numero
 						esCorrecto = reglas.comprobarInstruccion(instruccion, "assignto", type, funcion.getParametros());
 					}
-					else if (primerToken.contains("goto")) {
+					else if (primerToken.equals("goto") || primerToken.equals("goto:")) {
 						String[] type = {"nv", "nv"}; 
 						esCorrecto = reglas.comprobarInstruccion(instruccion, "goto", type, funcion.getParametros());
 					}
-					else if (primerToken.contains("move")) {
+					else if (primerToken.equals("move") || primerToken.equals("move:")) {
 						String[] type = {"nv"}; 
 						esCorrecto = reglas.comprobarInstruccion(instruccion, "move", type, funcion.getParametros());
 					}
-					else if (primerToken.contains("turn")) {
+					else if (primerToken.equals("turn") || primerToken.equals("turn:")) {
 						String[] type = {"d"}; 
 						esCorrecto = reglas.comprobarInstruccion(instruccion, "turn", type, funcion.getParametros());
 					}
-					else if (primerToken.contains("face")) {
+					else if (primerToken.equals("face") || primerToken.equals("face:")) {
 						String[] type = {"f"}; 
 						esCorrecto = reglas.comprobarInstruccion(instruccion, "face", type, funcion.getParametros());
 					}
-					else if (primerToken.contains("put")) {
+					else if (primerToken.equals("put") || primerToken.equals("put:")) {
 						String[] type = {"nv","o"}; 
 						esCorrecto = reglas.comprobarInstruccion(instruccion, "put", type, funcion.getParametros());
 					}
-					else if (primerToken.contains("pick")) {
+					else if (primerToken.equals("pick") || primerToken.equals("pick:")) {
 						String[] type = {"nv","o"}; 
 						esCorrecto = reglas.comprobarInstruccion(instruccion, "pick", type, funcion.getParametros());
 					}
-					else if (primerToken.contains("movetothe")) {
+					else if (primerToken.equals("movetothe") || primerToken.equals("movetothe:")) {
 						String[] type = {"nv","de"}; 
 						esCorrecto = reglas.comprobarInstruccion(instruccion, "movetothe", type, funcion.getParametros());
 					}
-					else if (primerToken.contains("moveindir")) {
+					else if (primerToken.equals("moveindir") || primerToken.equals("moveindir:")) {
 						String[] type = {"nv","f"}; 
 						esCorrecto = reglas.comprobarInstruccion(instruccion, "moveindir", type, funcion.getParametros());
 					}
-					else if (primerToken.contains("jumptothe")) {
+					else if (primerToken.equals("jumptothe") || primerToken.equals("jumptothe:")) {
 						String[] type = {"nv","de"}; 
 						esCorrecto = reglas.comprobarInstruccion(instruccion, "jumptothe", type, funcion.getParametros());
 					}
-					else if (primerToken.contains("jumpindir")) {
+					else if (primerToken.equals("jumpindir") || primerToken.equals("jumpindir:")) {
 						String[] type = {"nv","f"}; 
 						esCorrecto = reglas.comprobarInstruccion(instruccion, "jumpindir", type, funcion.getParametros());
 					}
-					else if (primerToken.contains("nop")) {
+					else if (primerToken.equals("nop") || primerToken.equals("nop:")) {
 						esCorrecto =true; 	
 					}
 					
