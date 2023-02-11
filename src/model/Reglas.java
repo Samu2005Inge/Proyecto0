@@ -9,7 +9,8 @@ public class Reglas {
 	final String initialChars = "abcdefghijklmnñopqrstuvwxyz";
 	final String chars = "abcdefghijklmnñopqrstuvwxyz1234567890";
 	final String nums = "1234567890";
-	final String commands[] = {"assignTo","goto","move","turn","face","put",};
+	final String commands[] = {"assignTo","goto","move","turn","face","put","pick","movetothe","moveindir","jumptothe","jumpindir","nop"};
+	final String comandos = "assignto goto move turn face put pick movetothe moveindir jumptothe jumpindir nop ";
 	
 	/**
 	 * Este metodo verifica que la linea enviada por parametro

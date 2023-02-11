@@ -30,7 +30,7 @@ public class Consola {
 					ejecutarCargaArchivo();
 				else if (opcionSeleccionada == 2)
 					ejecutarVerificacion();
-				else if (opcionSeleccionada == 4)
+				else if (opcionSeleccionada == 3)
 					seguir=false;
 			} 
 			catch (NumberFormatException | IOException e) {
@@ -47,7 +47,7 @@ public class Consola {
 		System.out.println("\nOpciones: \n");
 		System.out.println("1. Cargar un archivo");
 		System.out.println("2. Ejecutar comprobacion");
-		System.out.println("4. Salir");
+		System.out.println("3. Salir");
 		
 	}
 	
